@@ -27,6 +27,16 @@ vim.keymap.set("n", "yu", function()
 	vim.cmd(string.format("%d,%dyank", start, finish))
 end, { silent = true })
 
+-- Delete N lines ABOVE with "<count>du"
+vim.keymap.set("n", "du", function()
+  local n = vim.v.count1
+  local cur = vim.fn.line(".")
+  local start = math.max(1, cur - n)
+  local finish = cur - 1
+  if finish < start then return end
+  vim.cmd(string.format("%d,%dd", start, finish))
+end, { silent = true })
+
 -- Trigger relative line numbers
 vim.keymap.set("n", "<leader>n", function()
 	vim.opt.relativenumber = not vim.opt.relativenumber:get()
