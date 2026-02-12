@@ -27,22 +27,6 @@ vim.keymap.set("n", "yu", function()
 	vim.cmd(string.format("%d,%dyank", start, finish))
 end, { silent = true })
 
--- Support "-Nyy" to yank N lines above
-vim.keymap.set("n", "-", function()
-	local count = vim.v.count
-	if count == 0 then
-		return "-"
-	end
-
-	local start_line = vim.fn.line(".") - count
-	local end_line = vim.fn.line(".") - 1
-
-	if start_line < 1 then start_line = 1 end
-
-	vim.cmd(string.format("%d,%dyank", start_line, end_line))
-end, { expr = true, silent = true })
-
-
 -- Trigger relative line numbers
 vim.keymap.set("n", "<leader>n", function()
 	vim.opt.relativenumber = not vim.opt.relativenumber:get()
