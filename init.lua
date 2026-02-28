@@ -141,7 +141,12 @@ require("lazy").setup({
 			})
 
 			-- Toggle with Space + e
-			vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { silent = true, noremap = true })
+			vim.keymap.set("n", "<leader>e", function()
+				require("neo-tree.command").execute({
+					toggle = true,
+					reveal = true,
+				})
+			end, { silent = true })
 		end,
 	},
 	{
